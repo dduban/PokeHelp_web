@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>Informacje</title>
+		<link rel="stylesheet" href="resources/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="resources/css/bootstrap-theme.min.css"></link>
+        <link rel="stylesheet" href="resources/css/fontAwesome.css"></link>
+        <link rel="stylesheet" href="resources/css/hero-slider.css"></link>
+        <link rel="stylesheet" href="resources/css/owl-carousel.css"></link>
+        <link rel="stylesheet" href="resources/css/datepicker.css"></link>
+        <link rel="stylesheet" href="resources/css/templatemo-style.css"></link>
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"></link>
+
+        <script src="resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</h:head>
+<h:body>
+	
+	<div class="services" id="services-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flipper first-service">
+                            <div class="front">
+                                <div class="icon">
+                                    <img src="img/heart-icon.png" alt=""></img>
+                                </div>
+                                <h4>Aliquam finibus est</h4>
+                            </div>
+                            <div class="back">
+                                <p>Donec malesuada eu est in mattis. Aenean velit eros, blandit et tortor non, viverra hendrerit velit. Maecenas ut orci nec velit convallis lobortis sit amet ut magna. Ut rhoncus suscipit arcu, sed facilisis risus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flipper second-service">
+                            <div class="front">
+                                <div class="icon">
+                                    <img src="img/home-icon.png" alt=""></img>
+                                </div>
+                                <h4>Nullam sed turpis</h4>
+                            </div>
+                            <div class="back">
+                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vel diam porttitor, fermentum ante et, ornare elit. Morbi nec diam ex. Pellentesque habitant morbi tristique senectus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flipper third-service">
+                            <div class="front">
+                                <div class="icon">
+                                    <img src="img/revision-icon.png" alt=""></img>
+                                </div>
+                                <h4>Sed in luctus</h4>
+                            </div>
+                            <div class="back">
+                                <p>Mauris congue ex eu enim suscipit, in suscipit est efficitur. Donec quis orci malesuada nunc lobortis aliquet et ut lacus. Sed erat magna, fringilla ac imperdiet in, pulvinar quis ante. Maecenas eleifend, sem vitae tristique.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flipper fourth-service">
+                            <div class="front">
+                                <div class="icon">
+                                    <img src="img/chat-icon.png" alt=""></img>
+                                </div>
+                                <h4>Fusce congue ipsum</h4>
+                            </div>
+                            <div class="back">
+                                <p>Donec venenatis erat at leo dictum, at dictum eros volutpat. Phasellus in dui sed purus varius hendrerit. Duis ac enim ac orci efficitur condimentum vel eget purus. Sed vel massa nulla. Curabitur consequat sem ac velit sollicitudin ornare.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-us" id="contact-section"> 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                
+                <!-- Please visit https://templatemo.com/contact page if you do not know how to setup the contact form -->
+                
+                    <h:form id="contact" action="" method="post">
+                        <div class="row">
+                            <div class="col-md-4">
+                              <fieldset>
+                                <p:inputText name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="true" requiredMessage="Podaj nazwe"></p:inputText>
+                                
+                              </fieldset>
+                            </div>
+                            <div class="col-md-4">
+                              <fieldset>
+                                <p:inputText name="email" type="email" class="form-control" id="email" placeholder="Your email..." required=""></p:inputText>
+                              </fieldset>
+                            </div>
+                             <div class="col-md-4">
+                              <fieldset>
+                                <p:inputText name="subject" type="text" class="form-control" id="subject" placeholder="Subject..." required=""></p:inputText>
+                              </fieldset>
+                            </div>
+                            
+                            <div class="col-md-6">
+                              <fieldset>
+                                <p:button type="submit" id="form-submit" class="btn">Send it now</p:button>
+                              </fieldset>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-right-content">
+                        <div class="icon"><img src="img/map-marker-icon.png" alt=""></img></div>
+                        <h4>You can find us on maps</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+    <div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Copyright &copy; 2018 Your Company 
+                    
+                    - <a rel="nofollow" href="https://templatemo.com/tm-513-avalon" target="_parent">Avalon</a> 
+                    by <a rel="nofollow" href="https://www.html5max.com" target="_parent">HTML5 Max</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <h:outputScript>
+    <![CDATA[
+        window.jQuery || document.write('<script src="resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
+    ]]>
+	</h:outputScript>
+
+    <script src="resources/js/vendor/bootstrap.min.js"></script>
+    
+    <script src="resources/js/datepicker.js"></script>
+    <script src="resources/js/plugins.js"></script>
+    <script src="resources/js/main.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() 
+	{
+        // navigation click actions 
+        $('.scroll-link').on('click', function(event){
+            event.preventDefault();
+            var sectionID = $(this).attr("data-id");
+            scrollToID('#' + sectionID, 750);
+        });
+        // scroll to top action
+        $('.scroll-top').on('click', function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop:0}, 'slow');         
+        });
+        // mobile nav toggle
+        $('#nav-toggle').on('click', function (event) {
+            event.preventDefault();
+            $('#main-nav').toggleClass("open");
+        });
+    });
+    // scroll function
+    function scrollToID(id, speed){
+        var offSet = 0;
+        var targetOffset = $(id).offset().top - offSet;
+        var mainNav = $('#main-nav');
+        $('html,body').animate({scrollTop:targetOffset}, speed);
+        if (mainNav.hasClass("open")) {
+            mainNav.css("height", "1px").removeClass("in").addClass("collapse");
+            mainNav.removeClass("open");
+        }
+    }
+    if (typeof console === "undefined") {
+        console = {
+            log: function() { }
+        };
+    }
+    </script>
+
+</h:body></html>
