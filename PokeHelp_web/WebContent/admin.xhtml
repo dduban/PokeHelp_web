@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
 <title>Informacje</title>
 		<link rel="stylesheet" href="resources/css/bootstrap.min.css"></link>
@@ -19,32 +20,25 @@
         <script src="resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </h:head>
 <h:body>
-<div class="banner" id="top">
-        <div class="container-fluid">
-            <div class="row">
+	<div class="best-offer" id="best-offer-section" style="min-height:170px; height:170px;">
+        <div class="container-fluid" >
+            <div class="row" >
+                <div class="col-md-4" >
+                    <div class="best-offer-left-content" style="min-height:170px; height:170px;  padding: 0px 40px;">
+                        <div class="icon" style="line-height:170px;"><img src="resources/img/best-offer-icon.png" alt=""></img></div>
+                        
+                    </div>
+                </div>
                 <div class="col-md-8">
-                    <div class="left-banner-content">
-                        <div class="text-content">
+                    <div class="best-offer-right-content" style="min-height:170px; height:170px; padding: 10px 40px;">
+                        <div class="row" >
+                            <div class="col-md-10 col-sm-12" style="min-height:170px; height:170px;">
+                                <h2>Witaj administratorze<br></br><em style="font-size: 42px;">Nickname</em></h2>
+                                <p>W panelu administratora możesz zarządzać propozycjami pokemonów dodawanych przez użytkowników. Sprawdz poprawność danych, a następnie je zaakceptuj lub odrzuć odpowiednim przyciskiem.</p>
+                                
+                                
+                            </div>
                             
-                            <h1>Pomocnik trenera Pokemon GO</h1>
-                            <div class="white-border-button">
-                                <a href="#" class="scroll-link">Dowiedz się więcej</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="right-banner-content" >
-                        <div class="logo"><a href="index.html"><img src="resources/img/logo.png"></img></a></div>
-                        <h2>PokeHelp v2</h2>
-                        
-                        <div class="line-dec"></div>
-                        <p>Zaloguj się lub zarejestruj aby dołączyć do innych trenerów.</p>
-                        <div class="white-border-button" style="padding-top: 20px; position: relative;">
-                             <a href="#">Zaloguj się</a>
-                        </div>
-                        <div class="white-button" style="padding-top: 50px; position: relative;">
-                            <a href="#" style="color:#F2CF3D;">Zarejestruj się</a>
                         </div>
                     </div>
                 </div>
@@ -52,54 +46,7 @@
         </div>
     </div>
 
-
-    <div class="best-offer" id="best-offer-section">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="best-offer-left-content">
-                        <div class="icon"><img src="resources/img/best-offer-icon.png" alt=""></img></div>
-                        
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="best-offer-right-content">
-                        <div class="row">
-                            <div class="col-md-8 col-sm-12">
-                                <h2>Aktualne wydarzenie<br></br><em style="font-size: 42px;">Święta</em></h2>
-                                <p>Zwiększony resp zimowych pokemonów, pokemony w świątecznych kostiumach, nowe stroje w sklepie, nowe pokemony w jajkach</p>
-                                <div style=" width: 200px; float:left;"><h2 style="font-size: 28px;">Czas trwania:</h2><br></br><h2>Początek: <em style="font-size: 28px;">Święta</em></h2><br></br><h2>Koniec: <em style="font-size: 28px;">Święta</em></h2></div>
-                                <div style=" width: 400px; float:right; padding-right: 100px;"><ul style="max-height: 220px; overflow: auto;">
-                                    <li>● Piplup</li>
-                                    <li>● Pikachu</li>
-                                    <li>● Chimchar</li>
-                                    <li>● Oddish</li>
-                                    <li>● Piplup</li>
-                                    <li>● Pikachu</li>
-                                    <li>● Chimchar</li>
-                                    <li>● Oddish</li>
-                                    <li>● Piplup</li>
-                                    <li>● Pikachu</li>
-                                    <li>● Chimchar</li>
-                                    <li>● Oddish</li>
-                                </ul>
-                                </div>
-                                
-                                
-                                
-                                
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <img src="resources/img/best-offer-image.png" alt=""></img>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="events" id="events-section">
+	<div class="events" id="events-section">
         <div class="content-wrapper">
             <div class="inner-container container-fluid">
                 <div class="row">
@@ -376,47 +323,7 @@
             </div>
         </div> 
     </div>
-
-
-    <div class="testimonial" id="testimonial-section">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="testimonial-image"></div>
-                </div>
-                <div class="col-md-8">
-                    <div id="owl-testimonial" class="owl-carousel owl-theme">
-                        <div class="item col-md-12">
-                            <img src="resources/img/author_01.png" alt="Steven Walker"></img>
-                            <span>Web Designer</span>
-                            <h4>Steven Walker</h4>
-                            <br></br>
-                            <p><em>"</em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cura bitur et sem blandit, rhoncus ante, varius libero. Cras elemen tum tincidunt ullamcorper sed vehic ula dictum.<em>"</em></p>
-                        </div>
-                        <div class="item col-md-12">
-                            <img src="resources/img/author_02.png" alt="Johnny Smith"></img>
-                            <span>Web Developer</span>
-                            <h4>Johnny Smith</h4>
-                            <br></br>
-                            <p><em>"</em>Morbi elit est, pharetra ac enim a, faucibus dignissim augue. Quisque erat erat, placerat non pulvinar eget, sodales eget ex. Cras pulvinar purus et rutrum faucibus.<em>"</em></p>
-                        </div>
-                        <div class="item col-md-12">
-                            <img src="resources/img/author_03.png" alt="William Smoker"></img>
-                            <span>Managing Director</span>
-                            <h4>William Smoker</h4>
-                            <br></br>
-                            <p><em>"</em>Praesent luctus lacinia erat, quis lacinia ipsum varius a. Nullam a velit mollis, suscipit felis vitae, dictum libero hendrerit nibh quis sodales gravida ornare ultricies viverra.<em>"</em></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>      
-    
-   
-
-
-
+	
     <div>
         <div class="container-fluid">
             <div class="row">
