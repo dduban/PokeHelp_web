@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-<title>Informacje</title>
+<title>Admin</title>
 		<link rel="stylesheet" href="resources/css/bootstrap.min.css"></link>
         <link rel="stylesheet" href="resources/css/bootstrap-theme.min.css"></link>
         <link rel="stylesheet" href="resources/css/fontAwesome.css"></link>
@@ -20,21 +20,42 @@
         <script src="resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </h:head>
 <h:body>
-	<div class="best-offer" id="best-offer-section" style="min-height:170px; height:170px;">
+
+   		<div class="card" style="position:absolute; position: fixed; right: 0;">
+   		<h:form>
+    	<p:growl id="messages" showDetail="false"/>
+	        <p:commandButton id="dynaButton" value="Menu" type="button" icon="pi pi-bars" style="position:absolute; position: fixed; right: 0;"/>
+	        <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom" style="position:absolute; position: fixed; right: 0;">
+	            <p:submenu label="Admin">
+	                <p:menuitem value="Panel administratora" action="#{menuView.save}" update="messages" icon="pi pi-save"/>
+	            </p:submenu>
+	            <p:submenu label="Trener">
+	                <p:menuitem value="Pokemony" action="#{menuView.delete}" update="messages" icon="pi pi-times"/>
+	                <p:menuitem value="Kody" action="#{menuView.delete}" update="messages" icon="pi pi-times"/>
+	            </p:submenu>
+	            <p:submenu label="Wyloguj">
+	                <p:menuitem value="Wyloguj się" action="#{menuView.save}" update="messages" icon="pi pi-save"/>
+	            </p:submenu>
+	           
+	        </p:menu>
+	        </h:form>
+    	</div>
+    
+	<div class="best-offer" id="best-offer-section" style="min-height:200px; height:200px;">
         <div class="container-fluid" >
             <div class="row" >
-                <div class="col-md-4" >
-                    <div class="best-offer-left-content" style="min-height:170px; height:170px;  padding: 0px 40px;">
-                        <div class="icon" style="line-height:170px;"><img src="resources/img/best-offer-icon.png" alt=""></img></div>
+                <div class="col-md-2" >
+                    <div class="best-offer-left-content" style="min-height:200px; height:200px;  padding: 0px 40px;">
+                        <div class="icon" style="line-height:150px;"><img style="padding-top: 10px; height:190px;" src="resources/img/trener.png" alt=""></img></div>
                         
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="best-offer-right-content" style="min-height:170px; height:170px; padding: 10px 40px;">
+                <div class="col-md-10">
+                    <div class="best-offer-right-content" style="min-height:200px; height:200px; padding: 10px 40px;">
                         <div class="row" >
-                            <div class="col-md-10 col-sm-12" style="min-height:170px; height:170px;">
+                            <div class="col-md-10 col-sm-12" style="min-height:200px; height:200px;">
                                 <h2>Witaj administratorze<br></br><em style="font-size: 42px;">Nickname</em></h2>
-                                <p>W panelu administratora możesz zarządzać propozycjami pokemonów dodawanych przez użytkowników. Sprawdz poprawność danych, a następnie je zaakceptuj lub odrzuć odpowiednim przyciskiem.</p>
+                                <p>W panelu administratora możesz zarządzać propozycjami pokemonów dodawanych przez użytkowników. Sprawdz poprawność danych, a następnie je zaakceptuj lub odrzuć odpowiednim przyciskiem. Możesz również edytować eventy, lub wybierać który aktualnie trwa.</p>
                                 
                                 
                             </div>
@@ -45,284 +66,288 @@
             </div>
         </div>
     </div>
+    
 
-	<div class="events" id="events-section">
+   
+
+	<div class="events" id="events-section" style="background-image: url(resources/img/events-bg2.png);">
         <div class="content-wrapper">
             <div class="inner-container container-fluid">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <div class="section-heading">
-                            <div class="filter-categories">
-                                <ul class="project-filter">
-                                    <li class="filter"><span>Wszystkie</span></li>
-                                    <li class="filter"><span>Typ</span></li>
-                                    <li class="filter"><span>Sortuj</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-10 col-sm-12 col-md-offset-1">
-                        <div class="projects-holder" >
-                            <div class="event-list" >
-                                <ul >
-                                    <li class="project-item first-child mix web" >
-                                        <ul class="event-item web" style="background-color: #242164; padding:0; color: #F2CF1C">
-                                            <li>
-                                                <div class="date">
-                                                    
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <h3>Pokemon</h3>
-                                                
-                                            </li>
-                                            <li>
-                                                <h3>Typ</h3>
-                                            </li>
-                                            <li>
-                                                <h3>Max CP</h3>
-                                            </li>
-                                            <li> 
-                                                <h3>Pogoda</h3>
-                                            </li>
-                                            <li>
-                                                <h3>Regionalny</h3>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="white-button">
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                <div class="row" style="width:85%; margin: auto;">
+                
+		            <h:form>
+				
+				    <div class="card">
+				        <p:dataTable var="p" value="#{adminBB.list}" widgetVar="customersTable" rows="10"			
+				        			paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				        			currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+				                     emptyMessage="Nie znaleziono userów."
+				                     filteredValue="#{adminBB.filteredPokemons}"
+				                     allowUnsorting="true" sortMode="single" sortBy="#{p.nazwa}">
+				                     
+				
+				            
+				
+				            <p:column headerText="Nazwa" sortBy="#{p.nazwa}" filterBy="#{p.nazwa}">
+				                <h:outputText value="#{p.nazwa}"/>
+				            </p:column>
+				            
+				            <p:column headerText="Regionalny" sortBy="#{p.region}" filterBy="#{p.region}">
+				                <h:outputText value="#{p.region}"/>
+				            </p:column>
+				            
+				            <p:column headerText="Typ" sortBy="#{p.typBean}" filterBy="#{p.typBean}">
+				                <h:outputText value="#{p.typBean}"/>
+				            </p:column>
+				            
+				            
+				            <f:facet name="paginatorTopLeft">
+				                <p:commandButton type="button" icon="pi pi-refresh"/>
+				            </f:facet>
+				
+				            <f:facet name="paginatorBottomRight">
+				                <p:commandButton type="button" icon="pi pi-cloud-upload"/>
+				            </f:facet>
+				
+				            
+				
+				        </p:dataTable>
+				    </div>
+					</h:form>
+                    
                                
-                                <ul style="max-height: 486px; overflow: auto;">
-                                    <li class="project-item first-child mix web">
-                                        <ul class="event-item web">
-                                            <li>
-                                                <div class="date">
-                                                    <span><img src="resources/img/007.png" alt=""></img></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <h3><b>Squirtle</b></h3>
-                                                
-                                            </li>
-                                            <li>
-                                                <h3>Wodny</h3>
-                                            </li>
-                                            <li>
-                                                <h3>312</h3>
-                                            </li>
-                                            <li> 
-                                                <h3>Pochmurna</h3>
-                                            </li>
-                                            <li>
-                                                <h3>Nie</h3>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="white-button">
-                                                    <a href="#">Ulubiony</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="project-item first-child mix web">
-                                        <ul class="event-item web">
-                                            <li>
-                                                <div class="date">
-                                                    <span><img src="https://img.rankedboost.com/wp-content/plugins/pokemon-sword-shield/assets/pokemon-images-regular/Glaceon.png" alt=""></img></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <h3><b>Glaceon</b></h3>
-                                                
-                                            </li>
-                                            <li>
-                                                <h3>Lodowy</h3>
-                                            </li>
-                                            <li>
-                                                <h3>523</h3>
-                                            </li>
-                                            <li> 
-                                                <h3>Wietrzna</h3>
-                                            </li>
-                                            <li>
-                                                <h3>Nie</h3>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="white-button">
-                                                    <a href="#">Ulubiony</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="project-item first-child mix web">
-                                        <ul class="event-item web">
-                                            <li>
-                                                <div class="date">
-                                                    <span><img src="https://img.rankedboost.com/wp-content/plugins/pokemon-sword-shield/assets/pokemon-images-regular/Mamoswine.png" alt=""></img></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <h3><b>Mamoswine</b></h3>
-                                                
-                                            </li>
-                                            <li>
-                                                <h3>Lodowy</h3>
-                                            </li>
-                                            <li>
-                                                <h3>634</h3>
-                                            </li>
-                                            <li> 
-                                                <h3>Śnieżnie</h3>
-                                            </li>
-                                            <li>
-                                                <h3>Nie</h3>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="white-button">
-                                                    <a href="#">Ulubiony</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="project-item first-child mix web">
-                                        <ul class="event-item web">
-                                            <li>
-                                                <div class="date">
-                                                    <span><img src="https://img.rankedboost.com/wp-content/plugins/pokemon-sword-shield/assets/pokemon-images-regular/Lapras.png" alt=""></img></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <h3><b>Lapras</b></h3>
-                                                
-                                            </li>
-                                            <li>
-                                                <h3>Wodny</h3>
-                                            </li>
-                                            <li>
-                                                <h3>734</h3>
-                                            </li>
-                                            <li> 
-                                                <h3>Słonecznie</h3>
-                                            </li>
-                                            <li>
-                                                <h3>Tak</h3>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="white-button">
-                                                    <a href="#">Ulubiony</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="project-item first-child mix web">
-                                        <ul class="event-item web">
-                                            <li>
-                                                <div class="date">
-                                                    <span><img src="https://images.gameinfo.io/pokemon/256/445-00.webp" alt=""></img></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <h3><b>Garchomp</b></h3>
-                                                
-                                            </li>
-                                            <li>
-                                                <h3>Wodny</h3>
-                                            </li>
-                                            <li>
-                                                <h3>312</h3>
-                                            </li>
-                                            <li> 
-                                                <h3>Pochmurnie</h3>
-                                            </li>
-                                            <li>
-                                                <h3>Nie</h3>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="white-button">
-                                                    <a href="#">Ulubiony</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="project-item first-child mix web">
-                                        <ul class="event-item web">
-                                            <li>
-                                                <div class="date">
-                                                    <span><img src="https://img.rankedboost.com/wp-content/plugins/pokemon-sword-shield/assets/pokemon-images-regular/Jolteon.png" alt=""></img></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <h3><b>Jolteon</b></h3>
-                                                
-                                            </li>
-                                            <li>
-                                                <h3>Elektryczny</h3>
-                                            </li>
-                                            <li>
-                                                <h3>734</h3>
-                                            </li>
-                                            <li> 
-                                                <h3>Burza</h3>
-                                            </li>
-                                            <li>
-                                                <h3>Nie</h3>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="white-button">
-                                                    <a href="#">Ulubiony</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="project-item first-child mix web">
-                                        <ul class="event-item web">
-                                            <li>
-                                                <div class="date">
-                                                    <span><img src="https://img.rankedboost.com/wp-content/plugins/pokemon-sword-shield/assets/pokemon-images-regular/Gengar.png" alt=""></img></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <h3><b>Gengar</b></h3>
-                                                
-                                            </li>
-                                            <li>
-                                                <h3>Duch</h3>
-                                            </li>
-                                            <li>
-                                                <h3>234</h3>
-                                            </li>
-                                            <li> 
-                                                <h3>Noc pochmurna</h3>
-                                            </li>
-                                            <li>
-                                                <h3>Nie</h3>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="white-button">
-                                                    <a href="#">Ulubiony</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div> 
     </div>
+    <div class="best-offer" id="best-offer-section" style="min-height:1000px; height:1000px;">
+        <div class="container-fluid" >
+            <div class="row" style="text-align:center;">
+                <div class="col-md-8" >
+                    <div class="best-offer-right-content" style="min-height:500px; height:1000px; padding-top:100px; padding-left:20%; text-align:center; background:#3145a4;">
+                        <div class="row" style="text-align:center;">
+                            <div class="col-md-10 col-sm-12">
+                                <h2><em style="font-size: 42px;">Wybierz event</em></h2><br></br><p>Wybierz event, który ma zostać aktywowany, lub edytowany.</p>
+                               		<table>
+									  <tr style="font-size:28px;">
+									    <th>Nazwa</th>
+									    <th>Początek</th>
+									    <th>Koniec</th>
+									    <th></th>
+									    <th></th>
+									  </tr>
+									  <tr>
+									    <td style="width:30%;">Święta</td>
+									    <td>1.10</td>
+									    <td>12.10</td>
+									    <td style="width:10%">
+									    	<div class="white-button" style="padding: -10px -10px">
+                                               <a href="#">Aktywuj</a>
+                                            </div>
+                                        </td>
+									    <td style="width:10%">
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Edytuj</a>
+                                            </div>
+                                        </td>
+									    
+									  </tr>
+									  <tr>
+									    <td>Wakacje</td>
+									    <td>23.08</td>
+									    <td>28.08</td>
+									    <td>
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Aktywuj</a>
+                                            </div>
+                                        </td>
+									    <td style="width:10%">
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Edytuj</a>
+                                            </div>
+                                        </td>
+									  </tr>
+									  <tr>
+									    <td>Wakacje</td>
+									    <td>23.08</td>
+									    <td>28.08</td>
+									    <td>
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Aktywuj</a>
+                                            </div>
+                                        </td>
+									    <td style="width:10%">
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Edytuj</a>
+                                            </div>
+                                        </td>
+									  </tr>
+									  <tr>
+									    <td>Wakacje</td>
+									    <td>23.08</td>
+									    <td>28.08</td>
+									    <td>
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Aktywuj</a>
+                                            </div>
+                                        </td>
+									    <td style="width:10%">
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Edytuj</a>
+                                            </div>
+                                        </td>
+									  </tr>
+									  <tr>
+									    <td>Wakacje</td>
+									    <td>23.08</td>
+									    <td>28.08</td>
+									    <td>
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Aktywuj</a>
+                                            </div>
+                                        </td>
+									    <td style="width:10%">
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Edytuj</a>
+                                            </div>
+                                        </td>
+									  </tr>
+									  <tr>
+									    <td>Wakacje</td>
+									    <td>23.08</td>
+									    <td>28.08</td>
+									    <td>
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Aktywuj</a>
+                                            </div>
+                                        </td>
+									    <td style="width:10%">
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Edytuj</a>
+                                            </div>
+                                        </td>
+									  </tr>
+									  <tr>
+									    <td>Wakacje</td>
+									    <td>23.08</td>
+									    <td>28.08</td>
+									    <td>
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Aktywuj</a>
+                                            </div>
+                                        </td>
+									    <td style="width:10%">
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Edytuj</a>
+                                            </div>
+                                        </td>
+									  </tr>
+									  <tr >
+									    <td>Wakacje</td>
+									    <td>23.08</td>
+									    <td>28.08</td>
+									    <td>
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Aktywuj</a>
+                                            </div>
+                                        </td>
+									    <td style="width:10%;">
+									    	<div class="white-button" style="padding: 0px 0px">
+                                               <a href="#">Edytuj</a>
+                                            </div>
+                                        </td>
+									  </tr>
+									</table>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" >
+                    <div class="best-offer-right-content" style="min-height:500px; height:500px; padding-top:100px; padding-left:20%; text-align:center; background:#232064;">
+                        <div class="row" style="text-align:center;">
+                            <div class="col-md-10 col-sm-12" >
+                                <h2><em style="font-size: 42px;">Aktualny event</em></h2>
+                                <p>Nazwa:</p><h2>Nazwa</h2><p>Początek:</p><h2>Data</h2><p>Koniec:</p><h2>Data</h2>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="best-offer-right-content" style="min-height:500px; height:500px; padding-top:100px; padding-left:20%; text-align:center; background:#6083e4;">
+                        <div class="row" style="text-align:center;">
+                            <div class="col-md-10 col-sm-12">
+                                <h2><em style="font-size: 42px;">Dodaj event</em></h2>
+                                <p>
+                                
+		                        <h:form id="login" action="" method="post" style="float:left; text-align:center; padding-left:50px;">
+			                        <div class="row">
+			                            <div class="col-md-10" style="float:left; text-align:center;">
+			                              
+											<h:outputLabel for="Nazwa eventu" value="nazwa:" />
+											<p:inputText id="nazwa" class="form-control"
+												value="#{eventBB.event.nazwa}" required="true" requiredMessage="Podaj nazwę"
+												validatorMessage="co najwyżej 40 znaków">
+												<f:validateLength maximum="40" />
+											</p:inputText>
+											<p:message for="nazwa"/>
+											
+			                            </div>
+                            
+			                            
+			                            <div class="col-md-5" style="float:left; text-align:center;">
+			                              <h:outputLabel for="poczatek" value="Poczatek:" />
+											<p:inputMask id="poczatek" class="form-control"
+												value="#{eventBB.event.od}" required="true" requiredMessage="podaj poczatek"
+												mask="9999-99-99"/>
+												
+											<p:message for="poczatek"/>
+			                            </div>
+			                            
+			                            
+ 
+			                            
+			                            <div class="col-md-5" style="float:left; text-align:center;">
+			                              <h:outputLabel for="koniec" value="Koniec:" />
+											<p:inputMask id="koniec" class="form-control"
+												value="#{eventBB.event.do_}" required="true" requiredMessage="podaj koniec"
+												mask="9999-99-99"/>
+												
+											<p:message for="koniec"/>
+			                            </div>
+			                            
+			                            
+			                             
+			                            
+			                            <div class="col-md-6">
+			                              <p:messages id="msgs" />
+			
+											<p:commandButton value="Zarejestruj" action="#{eventBB.addEvent()}" update="@form" ajax="true" />
+											<p:messages id="messages" showDetail="true" autoUpdate="true" />
+								
+			                            </div>
+			                        </div>
+			                    </h:form>
+	                    		</p>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+   
 	
     <div>
         <div class="container-fluid">
@@ -336,19 +361,19 @@
             </div>
         </div>
     </div>
+    
+    
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <h:outputScript>
-    <![CDATA[
-        window.jQuery || document.write('<script src="resources/js/vendor/jquery-1.11.2.min.js"><\/script>')
-    ]]>
-	</h:outputScript>
+   
+    
 
     <script src="resources/js/vendor/bootstrap.min.js"></script>
     
     <script src="resources/js/datepicker.js"></script>
     <script src="resources/js/plugins.js"></script>
     <script src="resources/js/main.js"></script>
+    
+    
 
     <script type="text/javascript">
     $(document).ready(function() 

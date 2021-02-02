@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-<title>Informacje</title>
+<title>Kody</title>
 		<link rel="stylesheet" href="resources/css/bootstrap.min.css"></link>
         <link rel="stylesheet" href="resources/css/bootstrap-theme.min.css"></link>
         <link rel="stylesheet" href="resources/css/fontAwesome.css"></link>
@@ -15,13 +15,382 @@
         <link rel="stylesheet" href="resources/css/datepicker.css"></link>
         <link rel="stylesheet" href="resources/css/templatemo-style.css"></link>
 
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"></link>
+		<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700" rel="stylesheet" />
 
         <script src="resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </h:head>
 <h:body>
-	
-	<div class="services" id="services-section">
+
+	<div class="best-offer" id="best-offer-section" style="min-height:200px; height:200px; ">
+        <div class="container-fluid" >
+            <div class="row" >
+                <div class="col-md-2" >
+                    <div class="best-offer-left-content" style="min-height:200px; height:200px;  padding: 0px 40px;">
+                        <div class="icon" style="line-height:150px;"><img style="padding-top: 10px; height:190px;" src="resources/img/trener.png" alt=""></img></div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="best-offer-right-content" style="min-height:200px; height:200px; padding: 10px 40px;">
+                        <div class="row" >
+                            <div class="col-md-10 col-sm-12" style="min-height:200px; height:200px;" >
+                                <h2>Witaj trenerze<br></br><em style="font-size: 42px; color: white;">Nickname</em></h2>
+                                <p>Możesz tutaj przeglądać listę pokemonów dostępnych aktualnie w grze, filtrować je i sprawdzać jakie mają typy czy przy jakiej pogodzie się pojawiają. Możesz również wypełnić formularz i wysłać propozycję nowo dodanego pokemona.</p>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <div>
+	    <h:form id="form">
+
+    <p:messages id="messages"/>
+
+    <div class="card">
+        <p:dataTable id="tableStateDT" var="customer" value="#{dtMultiViewStateView.customers}"
+                     widgetVar="customersTable" multiViewState="true" rows="10" paginator="true"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15" selectionMode="single"
+                     selection="#{dtMultiViewStateView.selectedCustomer}" rowKey="#{customer.id}"
+                     emptyMessage="Nie znaleziono wybranych rekordów."
+                     filteredValue="#{dtMultiViewStateView.filteredCustomers}">
+
+            <f:facet name="header">
+                <p:outputPanel>
+                    <h:outputText value="Wyszukaj:"/>
+                    <p:inputText id="globalFilter" onkeyup="PF('customersTable').filter()" style="width:150px"
+                                 placeholder="Enter keyword"/>
+                </p:outputPanel>
+            </f:facet>
+
+            <p:ajax event="rowSelect" update=":form:customerDetail" oncomplete="PF('customerDialog').show()"/>
+
+            <p:column headerText="Nickname" filterBy="#{kody.nickname}" sortBy="#{kody.nickname}"
+                      filterMatchMode="contains">
+                <h:outputText value="#{kody.nickname}"/>
+            </p:column>
+            
+            <p:column headerText="Team" filterBy="#{kody.team}" sortBy="#{kody.team}"
+                      filterMatchMode="exact">
+                <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('customersTable').filter()"
+                                     style="width:100%; box-sizing: border-box;">
+                        <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{kody.team}"/>
+                    </p:selectOneMenu>
+                </f:facet>
+                <h:outputText value="#{kody.team}"/>
+            </p:column>
+
+            <p:column headerText="Kod" filterBy="#{kody.kod}" sortBy="#{kody.kod}"
+                      filterMatchMode="startsWith">
+                <span class="flag flag-#{kody.kod}" style="width: 30px; height: 20px"/>
+                <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                              value="#{kody.kod}"/>
+            </p:column>
+
+            <p:column headerText="Level" filterBy="#{customer.representative.name}"
+                      sortBy="#{customer.representative.name}" filterMatchMode="startsWith">
+                <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                              value="#{customer.representative.name}"/>
+            </p:column>
+
+             
+
+            <f:facet name="paginatorTopLeft">
+                <p:commandButton value="Clear table state" action="#{dtMultiViewStateView.clearMultiViewState}"
+                                 update="@form"/>
+            </f:facet>
+        </p:dataTable>
+    </div>
+
+    <br/>
+
+   
+
+    <p:dialog header="Customer Info" widgetVar="customerDialog" modal="true" showEffect="fade" hideEffect="fade"
+              resizable="false">
+        <p:outputPanel id="customerDetail" style="text-align:center;">
+            <p:panelGrid columns="2" rendered="#{not empty dtMultiViewStateView.selectedCustomer}"
+                         columnClasses="label,value">
+                <h:outputText value="Name:"/>
+                <h:outputText value="#{dtMultiViewStateView.selectedCustomer.name}"/>
+
+                <h:outputText value="Country"/>
+                <p:column>
+                    <span class="flag flag-#{dtMultiViewStateView.selectedCustomer.country.code}"
+                          style="width: 30px; height: 20px"/>
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{dtMultiViewStateView.selectedCustomer.name}"/>
+                </p:column>
+
+                <h:outputText value="Representative"/>
+                <p:column>
+                    <p:graphicImage
+                            name="images/avatar/#{dtMultiViewStateView.selectedCustomer.representative.image}"
+                            library="demo"
+                            width="32" style="vertical-align: middle"/>
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{dtMultiViewStateView.selectedCustomer.representative}"/>
+                </p:column>
+
+                <h:outputText value="Status:"/>
+                <span class="customer-badge status-#{dtMultiViewStateView.selectedCustomer.status.name().toLowerCase()}">#{dtMultiViewStateView.selectedCustomer.status}</span>
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+
+</h:form>
+    
+    
+    
+    </div>
+
+	<div class="events" id="events-section">
+        <div class="content-wrapper">
+            <div class="inner-container container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-heading">
+                            <div class="filter-categories">
+                                <ul class="project-filter">
+                                    <li class="filter"><span>Wszystkie</span></li>
+                                    <li class="filter"><span>Typ</span></li>
+                                    <li class="filter"><span>Sortuj</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-sm-12 col-md-offset-1" style="width:60%; margin-left:20%;">
+                        <div class="projects-holder" >
+                            <div class="event-list" >
+                                <ul >
+                                    <li class="project-item first-child mix web" >
+                                        <ul class="event-item web" style="background-color: #242164; padding:0; color: #F2CF1C">
+                                            <li>
+                                                <h3>Nickname</h3>
+                                                
+                                            </li>
+                                            <li>
+                                                <h3>Kod</h3>
+                                            </li>
+                                            <li>
+                                                <h3>Lvl</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>W</h3>
+                                            </li>
+                                            <li  style="width:1px;">
+                                                <div class="white-button">
+                                                </div>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                </ul>
+                               
+                                <ul style="max-height: 486px; overflow: auto;">
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User1</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>654567877</h3>
+                                            </li>
+                                            <li>
+                                                <h3>21</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User2</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>54333434</h3>
+                                            </li>
+                                            <li>
+                                                <h3>28</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User1</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>654567877</h3>
+                                            </li>
+                                            <li>
+                                                <h3>21</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User1</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>654567877</h3>
+                                            </li>
+                                            <li>
+                                                <h3>21</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User1</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>654567877</h3>
+                                            </li>
+                                            <li>
+                                                <h3>21</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User1</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>654567877</h3>
+                                            </li>
+                                            <li>
+                                                <h3>21</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User1</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>654567877</h3>
+                                            </li>
+                                            <li>
+                                                <h3>21</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User1</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>654567877</h3>
+                                            </li>
+                                            <li>
+                                                <h3>21</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User1</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>654567877</h3>
+                                            </li>
+                                            <li>
+                                                <h3>21</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="project-item first-child mix web">
+                                        <ul class="event-item web">
+                                            <li>
+                                                <h3><b>User1</b></h3>
+                                            </li>
+                                            <li>
+                                                <h3>654567877</h3>
+                                            </li>
+                                            <li>
+                                                <h3>21</h3>
+                                            </li>
+                                            <li> 
+                                                <h3>Śląskie</h3>
+                                            </li>
+                                            <li style="width:1px;">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    
+    <div class="services" id="services-section">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3">
@@ -29,12 +398,11 @@
                         <div class="flipper first-service">
                             <div class="front">
                                 <div class="icon">
-                                    <img src="img/heart-icon.png" alt=""></img>
+                                    <img src="resources/img/ch.png" alt=""></img>
                                 </div>
-                                <h4>Aliquam finibus est</h4>
                             </div>
                             <div class="back">
-                                <p>Donec malesuada eu est in mattis. Aenean velit eros, blandit et tortor non, viverra hendrerit velit. Maecenas ut orci nec velit convallis lobortis sit amet ut magna. Ut rhoncus suscipit arcu, sed facilisis risus.</p>
+                                <p>Zdobywaj informacje o pokemonach!</p>
                             </div>
                         </div>
                     </div>
@@ -44,12 +412,11 @@
                         <div class="flipper second-service">
                             <div class="front">
                                 <div class="icon">
-                                    <img src="img/home-icon.png" alt=""></img>
+                                    <img src="resources/img/bu.png" alt=""></img>
                                 </div>
-                                <h4>Nullam sed turpis</h4>
                             </div>
                             <div class="back">
-                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vel diam porttitor, fermentum ante et, ornare elit. Morbi nec diam ex. Pellentesque habitant morbi tristique senectus.</p>
+                                <p>Zamieszczaj propozycje nowych pokemonów dodanych do gry!</p>
                             </div>
                         </div>
                     </div>
@@ -59,12 +426,11 @@
                         <div class="flipper third-service">
                             <div class="front">
                                 <div class="icon">
-                                    <img src="img/revision-icon.png" alt=""></img>
+                                    <img src="resources/img/sq.png" alt=""></img>
                                 </div>
-                                <h4>Sed in luctus</h4>
                             </div>
                             <div class="back">
-                                <p>Mauris congue ex eu enim suscipit, in suscipit est efficitur. Donec quis orci malesuada nunc lobortis aliquet et ut lacus. Sed erat magna, fringilla ac imperdiet in, pulvinar quis ante. Maecenas eleifend, sem vitae tristique.</p>
+                                <p>Wybieraj ulubione pokemony!</p>
                             </div>
                         </div>
                     </div>
@@ -74,58 +440,13 @@
                         <div class="flipper fourth-service">
                             <div class="front">
                                 <div class="icon">
-                                    <img src="img/chat-icon.png" alt=""></img>
+                                    <img src="resources/img/pi.png" alt=""></img>
                                 </div>
-                                <h4>Fusce congue ipsum</h4>
                             </div>
                             <div class="back">
-                                <p>Donec venenatis erat at leo dictum, at dictum eros volutpat. Phasellus in dui sed purus varius hendrerit. Duis ac enim ac orci efficitur condimentum vel eget purus. Sed vel massa nulla. Curabitur consequat sem ac velit sollicitudin ornare.</p>
+                                <p>Wymieniaj się kodami przyjazni z trenerami z całej Polski i rajdujcie razem!</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="contact-us" id="contact-section"> 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                
-                <!-- Please visit https://templatemo.com/contact page if you do not know how to setup the contact form -->
-                
-                    <h:form id="contact" action="" method="post">
-                        <div class="row">
-                            <div class="col-md-4">
-                              <fieldset>
-                                <p:inputText name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="true" requiredMessage="Podaj nazwe"></p:inputText>
-                                
-                              </fieldset>
-                            </div>
-                            <div class="col-md-4">
-                              <fieldset>
-                                <p:inputText name="email" type="email" class="form-control" id="email" placeholder="Your email..." required=""></p:inputText>
-                              </fieldset>
-                            </div>
-                             <div class="col-md-4">
-                              <fieldset>
-                                <p:inputText name="subject" type="text" class="form-control" id="subject" placeholder="Subject..." required=""></p:inputText>
-                              </fieldset>
-                            </div>
-                            
-                            <div class="col-md-6">
-                              <fieldset>
-                                <p:button type="submit" id="form-submit" class="btn">Send it now</p:button>
-                              </fieldset>
-                            </div>
-                        </div>
-                    </h:form>
-                </div>
-                <div class="col-md-4">
-                    <div class="contact-right-content">
-                        <div class="icon"><img src="img/map-marker-icon.png" alt=""></img></div>
-                        <h4>You can find us on maps</h4>
                     </div>
                 </div>
             </div>
@@ -144,6 +465,18 @@
             </div>
         </div>
     </div>
+    
+    
+    <style type="text/css">
+    .ui-datatable .ui-datatable-header {
+        text-align: right !important;
+    }
+
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+        display: none;
+    }
+	</style>
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <h:outputScript>

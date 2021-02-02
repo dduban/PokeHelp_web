@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-<title>Informacje</title>
+<title>Login</title>
 		<link rel="stylesheet" href="resources/css/bootstrap.min.css"></link>
         <link rel="stylesheet" href="resources/css/bootstrap-theme.min.css"></link>
         <link rel="stylesheet" href="resources/css/fontAwesome.css"></link>
@@ -29,7 +29,7 @@
                         <div class="flipper first-service">
                             <div class="front">
                                 <div class="icon">
-                                    <img src="img/heart-icon.png" alt=""></img>
+                                    <img src="resources/img/ch.png" alt=""></img>
                                 </div>
                             </div>
                             <div class="back">
@@ -43,7 +43,7 @@
                         <div class="flipper second-service">
                             <div class="front">
                                 <div class="icon">
-                                    <img src="img/home-icon.png" alt=""></img>
+                                    <img src="resources/img/bu.png" alt=""></img>
                                 </div>
                             </div>
                             <div class="back">
@@ -57,7 +57,7 @@
                         <div class="flipper third-service">
                             <div class="front">
                                 <div class="icon">
-                                    <img src="img/revision-icon.png" alt=""></img>
+                                    <img src="resources/img/sq.png" alt=""></img>
                                 </div>
                             </div>
                             <div class="back">
@@ -71,7 +71,7 @@
                         <div class="flipper fourth-service">
                             <div class="front">
                                 <div class="icon">
-                                    <img src="img/chat-icon.png" alt=""></img>
+                                    <img src="resources/img/pi.png" alt=""></img>
                                 </div>
                             </div>
                             <div class="back">
@@ -121,43 +121,58 @@
                 </div>
                 <div class="col-md-6" >
                 
-                    <h:form id="register" action="" method="post" >
+                
+                
+                    <h:form id="register">
                         <div class="row">
+                        
                             <div class="col-md-8">
-                              <p:inputText id="nickname" class="form-control"
-									required="true" requiredMessage="Podaj nick" placeholder="Nickname"
+                            	<p:outputLabel for="login" value="Login" />
+                             	<p:inputText id="login" class="form-control"
+                             		value="#{loginBB.user.login}" required="true"
+									requiredMessage="Podaj login"
 									validatorMessage="co najwyżej 40 znaków">
 									<f:validateLength maximum="40" />
 								</p:inputText>
-								<p:message for="nickname" display="icon"/>
+								<p:message for="login" />
                             </div>
+                            
+                        
                             <div class="col-md-8">
-                              <p:inputText id="password2" class="form-control"
-									required="true" requiredMessage="Podaj hasło" placeholder="Password"
-									validatorMessage="co najwyżej 40 znaków">
+                            	<p:outputLabel for="password1" value="Hasło" />
+                              	<p:password id="password1" class="form-control"
+                             		value="#{loginBB.user.password}" match="password2" required="true"
+									requiredMessage="Podaj hasło"
+									validatorMessage="Hasło musi być takie samo"
+									>
 									<f:validateLength maximum="40" />
-								</p:inputText>
-								<p:message for="password2" display="icon"/>
+								</p:password>
+								<p:message for="password1" />
                             </div>
+                            
                             <div class="col-md-8">
-                              <p:inputText id="conf-password" class="form-control"
-									required="true" requiredMessage="Podaj hasło" placeholder="Confirm Password"
-									validatorMessage="co najwyżej 40 znaków">
+                            	<p:outputLabel for="password2" value="Powtórzone hasło" />
+                              	<p:password id="password2" class="form-control"
+                             		value="#{loginBB.user.password}" required="true"
+									requiredMessage="Powtórz hasło"
+									validatorMessage="Hasło musi być takie samo">
 									<f:validateLength maximum="40" />
-								</p:inputText>
-								<p:message for="conf-password" display="icon"/>
+								</p:password>
+								<p:message for="password2" />
                             </div>
-                             
                             
                             <div class="col-md-6">
-                              <p:messages id="msgs" />
-
-								<p:commandButton value="Zarejestruj"/>
-					
-								<p:button value="Anuluj"/>
+								<div style="float:left;"><p:commandButton value="Zarejestruj" action="#{loginBB.register()}" update="@form" ajax="true" /></div>
+								
+								<div style="width:100%; height:30px; float:left; margin-top:20px;"> <p:messages id="messages" showDetail="true" autoUpdate="true" /></div>
+								
                             </div>
                         </div>
                     </h:form>
+                    
+                    
+                    
+                    
                 </div>
             </div>
         </div>
